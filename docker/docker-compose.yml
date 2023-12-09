@@ -1,0 +1,12 @@
+version: '3.7'
+
+services:
+  web-client:
+    platform: linux/amd64
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: web-client-application:0.0.1
+    container_name: web-client-application
+    ports:
+      - 8090:8900
