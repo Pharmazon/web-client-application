@@ -1,4 +1,4 @@
-FROM openjdk:17-jdk
+FROM dzo.sw.sbc.space/sbt/ci90000459_sblnxos/sblnxos/container-8-ubi-sbt/openjdk-17:8.8.2-189
 
 USER root
 

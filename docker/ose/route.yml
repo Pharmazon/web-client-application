@@ -1,0 +1,19 @@
+kind: Route
+apiVersion: route.openshift.io/v1
+metadata:
+  name: as-emulator
+  labels:
+    app: as-emulator
+    name: as-emulator
+  annotations:
+    haproxy.router.openshift.io/balance: roundrobin
+    openshift.io/host.generated: 'true'
+spec:
+  host: maibridge-as-emulator-4.apps.stands-vdc01.solution.sbt
+  to:
+    kind: Service
+    name: as-emulator
+    weight: 100
+  port:
+    targetPort: tcp-8080
+  wildcardPolicy: None

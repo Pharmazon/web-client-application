@@ -9,4 +9,4 @@ services:
     image: web-client-application:0.0.1
     container_name: web-client-application
     ports:
-      - 8090:8900
+      - 8080:8900

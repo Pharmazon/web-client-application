@@ -1,0 +1,18 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: as-emulator
+spec:
+  ports:
+    - name: tcp-8080
+      protocol: TCP
+      port: 8080
+      targetPort: 8900
+  selector:
+    app: as-emulator
+    name: as-emulator
+  type: ClusterIP
+  sessionAffinity: None
+  ipFamilies:
+    - IPv4
+  ipFamilyPolicy: SingleStack

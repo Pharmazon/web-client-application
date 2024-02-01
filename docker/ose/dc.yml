@@ -1,0 +1,49 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: as-emulator
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: as-emulator
+      name: as-emulator
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: as-emulator
+        name: as-emulator
+    spec:
+      containers:
+        - name: as-emulator
+          image: >-
+            dzo.sw.sbc.space/sbt_dev/ci90000141_mail_dev/email_cloud_docker/as-emulator:0.0.1
+          ports:
+            - name: tcp-8900
+              containerPort: 8900
+              protocol: TCP
+          resources:
+            limits:
+              cpu: 150m
+              memory: 200Mi
+            requests:
+              cpu: 50m
+              memory: 100Mi
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+          imagePullPolicy: Always
+      restartPolicy: Always
+      terminationGracePeriodSeconds: 30
+      dnsPolicy: ClusterFirst
+      securityContext: {}
+      imagePullSecrets:
+        - name: general-emc-docker-registry-pull-secret
+      schedulerName: default-scheduler
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 25%
+      maxSurge: 25%
+  revisionHistoryLimit: 10
+  progressDeadlineSeconds: 600
